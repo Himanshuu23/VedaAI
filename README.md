@@ -179,57 +179,6 @@ npm run preview
 ```
 
 ---
-
-## Deploying
-
-### Frontend - Vercel
-
-1. Push the frontend folder to a GitHub repo
-2. Import it on vercel.com
-3. Add these environment variables in the Vercel dashboard:
-   ```
-   VITE_API_URL=https://your-render-app.onrender.com
-   VITE_WS_URL=wss://your-render-app.onrender.com
-   ```
-4. Deploy
-
-### Backend - Render
-
-Create three services on render.com:
-
-**1. Web Service (API)**
-- Build command: `npm install && npm run build`
-- Start command: `node dist/server.js`
-
-**2. Background Worker**
-- Build command: `npm install && npm run build`
-- Start command: `node dist/workers/assessment.worker.js`
-
-**3. Redis**
-- Create a Render managed Redis instance, copy the internal host and port
-
-Set these environment variables on both the Web Service and Worker:
-```
-NODE_ENV=production
-PORT=5000
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/veda-ai
-REDIS_HOST=<internal host from Render Redis>
-REDIS_PORT=6379
-JWT_SECRET=your_long_random_secret
-ANTHROPIC_API_KEY=sk-ant-your-key-here
-CORS_ORIGIN=https://your-app.vercel.app
-JWT_EXPIRES_IN=7d
-```
-
-### MongoDB - Atlas
-
-1. Go to atlas.mongodb.com and create a free M0 cluster
-2. Create a database user with a password
-3. Whitelist all IPs (0.0.0.0/0) for Render compatibility
-4. Copy the connection string and set it as `MONGODB_URI`
-
----
-
 ## API Reference
 
 | Method | Path | Auth | Description |
